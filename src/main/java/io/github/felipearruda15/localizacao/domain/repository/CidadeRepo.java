@@ -2,6 +2,7 @@ package io.github.felipearruda15.localizacao.domain.repository;
 
 import io.github.felipearruda15.localizacao.domain.entity.Cidade;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface CidadeRepo extends JpaRepository<Cidade, Long> {
 
     List<Cidade> findByNomeContaining(String nome);
 
+    @Query("select c from Cidade c where lower(c.nome) like lower(?1)")
+    List<Cidade> findByNomeLike(String nome);
 }
