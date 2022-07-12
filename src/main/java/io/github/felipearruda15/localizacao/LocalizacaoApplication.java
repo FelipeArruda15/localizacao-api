@@ -23,11 +23,10 @@ public class LocalizacaoApplication implements CommandLineRunner {
 	}
 
 	void listarCidadesPorNome(){
-		cidadeRepo.findByNome("Fortaleza").forEach(System.out::println);
-		cidadeRepo.findByNomeStartingWith("Curi").forEach(System.out::println);
-		cidadeRepo.findByNomeEndingWith("lho").forEach(System.out::println);
-		cidadeRepo.findByNomeContaining("rto").forEach(System.out::println);
-		cidadeRepo.findByNomeLike("curitiba").forEach(System.out::println);
+		cidadeRepo.findByHabitantesLessThan(1000001L).forEach(System.out::println);
+		cidadeRepo.findByHabitantesLessThanEqual(1000001L).forEach(System.out::println);
+		cidadeRepo.findByHabitantesGreaterThan(1000001L).forEach(System.out::println);
+		cidadeRepo.findByHabitantesLessThanEqualAndNomeLike(78978979L, "Natal").forEach(System.out::println);
 	}
 
 	@Override

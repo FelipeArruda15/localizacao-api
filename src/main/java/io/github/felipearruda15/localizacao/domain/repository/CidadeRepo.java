@@ -20,4 +20,12 @@ public interface CidadeRepo extends JpaRepository<Cidade, Long> {
 
     @Query("select c from Cidade c where lower(c.nome) like lower(?1)")
     List<Cidade> findByNomeLike(String nome);
+
+    List<Cidade> findByHabitantesLessThan(Long habitantes);
+
+    List<Cidade> findByHabitantesGreaterThan(Long habitantes);
+
+    List<Cidade> findByHabitantesLessThanEqual(Long habitantes);
+
+    List<Cidade> findByHabitantesLessThanEqualAndNomeLike(Long habitantes, String nome);
 }
