@@ -2,6 +2,7 @@ package io.github.felipearruda15.localizacao;
 
 import io.github.felipearruda15.localizacao.domain.entity.Cidade;
 import io.github.felipearruda15.localizacao.domain.repository.CidadeRepo;
+import io.github.felipearruda15.localizacao.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,21 +17,10 @@ public class LocalizacaoApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private CidadeRepo cidadeRepo;
-
-	void listarCidades(){
-		cidadeRepo.findAll().forEach(System.out::println);
-	}
-
-	void listarCidadesPorNome(){
-		cidadeRepo.findByHabitantesLessThan(1000001L).forEach(System.out::println);
-		cidadeRepo.findByHabitantesLessThanEqual(1000001L).forEach(System.out::println);
-		cidadeRepo.findByHabitantesGreaterThan(1000001L).forEach(System.out::println);
-		cidadeRepo.findByHabitantesLessThanEqualAndNomeLike(78978979L, "Natal").forEach(System.out::println);
-	}
+	private CidadeService cidadeService;
 
 	@Override
 	public void run(String... args) throws Exception {
-		listarCidadesPorNome();
+		cidadeService.listarCidadesPorNomePaginado();
 	}
 }
