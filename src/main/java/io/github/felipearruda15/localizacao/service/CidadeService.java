@@ -2,7 +2,9 @@ package io.github.felipearruda15.localizacao.service;
 
 import io.github.felipearruda15.localizacao.domain.entity.Cidade;
 import io.github.felipearruda15.localizacao.domain.repository.CidadeRepo;
+import io.github.felipearruda15.localizacao.domain.repository.specs.CidadeSpecs;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,5 +55,11 @@ public class CidadeService {
                 .withIgnoreCase();
         Example<Cidade> example = Example.of(cidade, matcher);
         return cidadeRepo.findAll(example);
+    }
+
+
+    public void listarCidadesByNomeSpec(){
+        Specification<Cidade> spec = CidadeSpecs.nomeIgual("São Paulo").and(CidadeSpecs.habitantesMenorOuIgual(78787900L));
+        cidadeRepo.findAll(spec).forEach(System.out::println);
     }
 }
