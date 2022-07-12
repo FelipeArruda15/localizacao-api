@@ -18,19 +18,12 @@ public class LocalizacaoApplication implements CommandLineRunner {
 	@Autowired
 	private CidadeRepo cidadeRepo;
 
-	@Transactional
-	void salvarCidade(){
-		var cidade = new Cidade(1L, "São Paulo", 12396372L);
-		cidadeRepo.save(cidade);
-	}
-
 	void listarCidades(){
 		cidadeRepo.findAll().forEach(System.out::println);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		salvarCidade();
 		listarCidades();
 	}
 }
