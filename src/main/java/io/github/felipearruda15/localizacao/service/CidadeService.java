@@ -62,4 +62,14 @@ public class CidadeService {
         Specification<Cidade> spec = CidadeSpecs.nomeIgual("São Paulo").and(CidadeSpecs.habitantesMenorOuIgual(78787900L));
         cidadeRepo.findAll(spec).forEach(System.out::println);
     }
+
+    public void listarCidadesSpecsFiltroDinamico(Cidade filtro){
+        Specification<Cidade> specs = Specification.where((root, query, criteriaBuilder) -> criteriaBuilder.conjunction());
+
+        if (filtro.getNome() != null){
+            specs = specs.and(CidadeSpecs.nomeLike(filtro.getNome()));
+        }
+
+        cidadeRepo.findAll(specs).forEach(System.out::println);
+    }
 }
