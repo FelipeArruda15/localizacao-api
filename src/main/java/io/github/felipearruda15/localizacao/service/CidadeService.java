@@ -72,4 +72,11 @@ public class CidadeService {
 
         cidadeRepo.findAll(specs).forEach(System.out::println);
     }
+
+    public void listarCidadesPorNomeSQL(){
+        cidadeRepo
+                .findByNomeSqlNativo("São Paulo")
+                .stream().map(cidadeProjection -> new Cidade(cidadeProjection.getId(), cidadeProjection.getNome(), null))
+                .forEach(System.out::println);
+    }
 }
